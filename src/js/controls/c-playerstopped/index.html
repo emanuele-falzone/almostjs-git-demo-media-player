@@ -1,8 +1,8 @@
-<h3>PlayerStopped</h3>
+<h3>Now Playing</h3>
 <dl class="dl-horizontal" data-bind="if: item">
-        <dt>title</dt>
+        <dt>Title</dt>
         <dd data-bind="text: item()['title']"></dd>
 </dl>
 <div class="row">
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'play')">play</a>
+    <a class="col-xs-4 btn btn-success" data-bind="click: trigger.bind($data, 'play')">Play</a>
 </div>
