@@ -4,6 +4,8 @@
 exports.createEvents = function (options) {
     return {
         //comment-to-help-git
+        'authorselected': require('./authorselected').createEvent(options),
+        //comment-to-help-git
         'end': require('./end').createEvent(options),
         //comment-to-help-git
         'play': require('./play').createEvent(options),

@@ -9,6 +9,8 @@ exports.register = function () {
     //comment-to-help-git
     require('./c-application').register();
     //comment-to-help-git
+    require('./c-authorlist').register();
+    //comment-to-help-git
     require('./c-end').register();
     //comment-to-help-git
     require('./c-player').register();

@@ -13,7 +13,7 @@ function Repository(options) {
 
     // TODO: remove this BEGIN
     this.db = Promise.promisifyAll(new DataStore({
-        filename: 'songs',
+        filename: 'authors',
         inMemoryOnly: true
     }));
     this.db.insert(require('./default'));

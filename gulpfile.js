@@ -26,8 +26,7 @@ gulp.task('vendor', function () {
             './node_modules/bootstrap-notify/bootstrap-notify.min.js',
             './node_modules/jquery/dist/jquery.min.js',
             './node_modules/nedb/browser-version/out/nedb.min.js',
-            './node_modules/bluebird/js/browser/bluebird.min.js',
-            './node_modules/howler/dist/howler.min.js'
+            './node_modules/bluebird/js/browser/bluebird.min.js'
         ]).pipe(gulp.dest('./www/js')),
         gulp.src('./node_modules/knockout/build/output/knockout-latest.js')
             .pipe(rename('knockout.min.js'))
@@ -63,7 +62,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('css', function () {
-    return gulp.src('./src/css/bootstrap.min.css').pipe(gulp.dest('./www/css'));
+    return gulp.src('./node_modules/bootstrap/dist/css/bootstrap.min.css').pipe(gulp.dest('./www/css'));
 });
 
 gulp.task('build', ['html', 'css', 'js', 'vendor']);

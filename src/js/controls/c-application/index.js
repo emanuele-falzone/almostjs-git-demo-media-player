@@ -24,6 +24,7 @@ function ViewModel(params) {
 
 ViewModel.prototype.id = 'application';
 ViewModel.prototype.children = [
+    'authorlist', // AuthorList
     'player', // Player
     'songlist', // SongList
 ];
