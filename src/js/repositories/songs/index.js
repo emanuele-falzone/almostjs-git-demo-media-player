@@ -1,7 +1,8 @@
 /*jslint node: true, nomen: true */
 "use strict";
 
-var Promise = require('bluebird'),
+var $ = require('jquery'),
+    Promise = require('bluebird'),
     DataStore = require('nedb');
 
 function Repository(options) {
@@ -9,29 +10,33 @@ function Repository(options) {
         return new Repository(options);
     }
 
-    // TODO: initialization
-
-    // TODO: remove this BEGIN
-    this.db = Promise.promisifyAll(new DataStore({
-        filename: 'songs',
-        inMemoryOnly: true
-    }));
-    this.db.insert(require('./default'));
-    // TODO: remove this END
+    this.db = new Promise(function (resolve, reject) {
+        var collection = Promise.promisifyAll(new DataStore({
+            filename: 'songs',
+            inMemoryOnly: true
+        }));
+        $.ajax({
+            url: "http://emanuele.falzone.gitlab.io/almostjs-demo-game-data/songs.json",
+        }).done(function (songs) {
+            collection.insert(songs);
+            resolve(collection);
+        }).fail(function (err) {
+            $.notify({message: 'Download failed!'}, {allow_dismiss: true, type: 'danger'});
+            reject(err);
+        });
+    });
 }
 
 Repository.prototype.findById = function (id) {
-    // TODO: implement the accessor to the datasource which returns a promise
-    // TODO: remove this BEGIN
-    return this.db.findOneAsync({id: id});
-    // TODO: remove this END
+    return this.db.then(function (collection) {
+        return collection.findOneAsync({id: id});
+    });
 };
 
 Repository.prototype.find = function (fields, project) {
-    // TODO: implement the accessor to the datasource which returns a promise
-    // TODO: remove this BEGIN
-    return this.db.findAsync(fields, project);
-    // TODO: remove this END
+    return this.db.then(function (collection) {
+        return collection.findAsync(fields, project);
+    });
 };
 
 exports.createRepository = Repository;

@@ -1,12 +1,11 @@
-<h3>PlayerPlaying</h3>
+<h3>Now Playing</h3>
 <dl class="dl-horizontal" data-bind="if: item">
         <dt>image</dt>
         <dd data-bind="text: item()['image']"></dd>
-        <dt>title</dt>
+        <dt>Title</dt>
         <dd data-bind="text: item()['title']"></dd>
 </dl>
 <div class="row">
     <c-end params="context: context, trigger: trigger.bind($data, 'end')"></c-end>
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'end')">end</a>
-    <a class="col-xs-2 btn btn-primary" data-bind="click: trigger.bind($data, 'stop')">stop</a>
+    <a class="col-xs-4 btn btn-danger" data-bind="click: trigger.bind($data, 'stop')">Stop</a>
 </div>
