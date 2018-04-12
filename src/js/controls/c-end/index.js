@@ -6,27 +6,27 @@ var ko = require('knockout');
 function ViewModel(params) {
     var self = this;
 
-    // TODO: Execution
-    /*
-      example:
-        //to trigger the event: params.fire;
-        document.addEventListener('keydown', params.fire);
-    */
-
     self.context = params.context;
+    self.trigger = params.trigger;
+    self.player = self.context.repositories.player;
 
-    // THIS CAN BE REMOVED (BEGIN)
+    function register(howl) {
+        howl.on('end', self.trigger);
+    }
+    function unregister(howl) {
+        howl.off('end', self.trigger);
+    }
+
+    register(self.player.sound());
+
+    var listener = self.player.sound.subscribe(function (howl) {
+        unregister(self.player.sound());
+        register(howl);
+    });
+
     self.stop = function () {
-      // TODO: Execution
-      /*
-        example [continue]:
-          document.removeEventListener('keydown', params.fire);
-      */
-    };
-    // THIS CAN BE REMOVED (END)
-
-    self.trigger = function (id) {
-        self.context.events[id](self.context);
+        unregister(self.player.sound());
+        listener.dispose();
     };
 }
 
@@ -38,9 +38,7 @@ exports.register = function () {
             createViewModel: function (params, componentInfo) {
                 var vm = new ViewModel(params);
                 ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () {
-                    // THIS CAN BE REMOVED (BEGIN)
                     vm.stop();
-                    // THIS CAN BE REMOVED (END)
                 });
                 return vm;
             }
