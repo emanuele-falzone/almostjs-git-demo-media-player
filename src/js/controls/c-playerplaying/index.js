@@ -20,6 +20,7 @@ ViewModel.prototype.id = 'playerplaying';
 
 ViewModel.prototype.fields = {
     id: 1,
+    'image': 1,
     'title': 1,
 };
 
