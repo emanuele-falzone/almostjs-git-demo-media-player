@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        </div>
+</div>
+<!-- ko if: active() === 'playing' -->
+    <!-- Playing -->
+    <c-playing params="context: context"></c-playing>
+<!-- /ko -->
+<!-- ko if: active() === 'stopped' -->
+    <!-- Stopped -->
+    <c-stopped params="context: context"></c-stopped>
+<!-- /ko -->
