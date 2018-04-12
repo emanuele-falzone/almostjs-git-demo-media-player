@@ -1,11 +1,12 @@
 <h3>Now Playing</h3>
 <dl class="dl-horizontal" data-bind="if: item">
-        <dt>image</dt>
-        <dd data-bind="text: item()['image']"></dd>
         <dt>Title</dt>
         <dd data-bind="text: item()['title']"></dd>
 </dl>
 <div class="row">
     <c-end params="context: context, trigger: trigger.bind($data, 'end')"></c-end>
     <a class="col-xs-4 btn btn-danger" data-bind="click: trigger.bind($data, 'stop')">Stop</a>
+</div>
+<div class="row col-md-8" data-bind="if: item">
+    <img class="img-rounded" width="100%" data-bind="attr:{src: 'http://emanuele.falzone.gitlab.io/almostjs-demo-game-data/images/' + item()['image']}">
 </div>
